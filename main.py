@@ -4,22 +4,22 @@ import random
 from pytimeparse import parse
 
 
-my_secret = os.environ['TOKEN']
-TG_CHAT_ID = '39444986'
-bot = ptbot.Bot(my_secret)
-bot.send_message(TG_CHAT_ID, "Привет!")
-bot.send_message(TG_CHAT_ID, "Запускаю таймер...")
+first_secret = os.environ['TOKEN']
+second_secret = os.environ['TG_CHAT_ID']
+bot = ptbot.Bot(first_secret)
+bot.send_message(second_secret, "Привет!")
+bot.send_message(second_secret, "Запускаю таймер...")
 
 
-def notify_progress(secs_left, TG_CHAT_ID, 
+def notify_progress(secs_left, second_secret, 
                     message_id, msg):
     progressbar = render_progressbar(msg, secs_left)
-    bot.update_message(TG_CHAT_ID, message_id, 
+    bot.update_message(second_secret, message_id, 
                        "Осталось {} секунд\n{}".format(secs_left, progressbar))
     
 
 def notify():
-    bot.send_message(TG_CHAT_ID, "Время вышло!")
+    bot.send_message(second_secret, "Время вышло!")
 
 
 def render_progressbar(msg, secs_left, 
@@ -34,17 +34,14 @@ def render_progressbar(msg, secs_left,
     return '{0} |{1}| {2}% {3}'.format(prefix, pbar, percent, suffix)
 
 
-def choose(chat_id, question):
+def choose(second_secret, question):
     msg = parse(question)
-    message_id = bot.send_message(TG_CHAT_ID, "Запускаю таймер...")
+    message_id = bot.send_message(second_secret, "Запускаю таймер...")
     bot.create_countdown(msg, notify_progress,
-                         TG_CHAT_ID=TG_CHAT_ID,
+                         second_secret=second_secret,
                          message_id=message_id, 
                          msg=msg)
     bot.create_timer(msg, notify)
-    print("Мне написал пользователь с ID:", chat_id)
-    print("Он спрашивал:", question)
-    print("Я ответил:", question)
 
 
 def main():
