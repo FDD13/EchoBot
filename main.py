@@ -39,8 +39,7 @@ def choose(second_secret, question):
     message_id = bot.send_message(second_secret, "Запускаю таймер...")
     bot.create_countdown(msg, notify_progress,
                          second_secret=second_secret,
-                         message_id=message_id, 
-                         msg=msg)
+                         message_id=message_id, msg=msg)
     bot.create_timer(msg, notify)
 
 
