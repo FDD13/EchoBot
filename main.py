@@ -34,18 +34,19 @@ def render_progressbar(msg, secs_left,
     return '{0} |{1}| {2}% {3}'.format(prefix, pbar, percent, suffix)
 
 
-
-def main():
-    def choose(second_secret, question):
-        msg = parse(question)
-        message_id = bot.send_message(second_secret, "Запускаю таймер...")
-        bot.create_countdown(msg, notify_progress,
+def choose(second_secret, question):
+    msg = parse(question)
+    message_id = bot.send_message(second_secret, "Запускаю таймер...")
+    bot.create_countdown(msg, notify_progress,
                          second_secret=second_secret,
                          message_id=message_id, 
                          msg=msg)
-        bot.create_timer(msg, notify)
-        bot.reply_on_message(choose)
-        bot.run_bot() 
+    bot.create_timer(msg, notify)
+
+
+def main():
+    bot.reply_on_message(choose)
+    bot.run_bot() 
 
 
 if __name__ == "__main__":
