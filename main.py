@@ -41,15 +41,12 @@ def choose(second_secret, question):
     bot.create_timer(msg, notify)
 
 
-def main():
+if __name__ == "__main__":
+    bot = ptbot.Bot(FIRST_SECRET)
     bot.send_message(SECOND_SECRET, "Привет!")
     bot.send_message(SECOND_SECRET, "Запускаю таймер...")
     bot.reply_on_message(choose)
-    bot.run_bot() 
-
-
-if __name__ == "__main__":
-    bot = ptbot.Bot(FIRST_SECRET)
-    main()
+    bot.run_bot()
+    
 
 
