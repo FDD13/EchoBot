@@ -6,8 +6,6 @@ from pytimeparse import parse
 
 FIRST_SECRET = os.environ['TOKEN']
 SECOND_SECRET = os.environ['TG_CHAT_ID']
-bot = ptbot.Bot(FIRST_SECRET)
-
 
 
 def notify_progress(secs_left, second_secret, 
@@ -51,6 +49,7 @@ def main():
 
 
 if __name__ == "__main__":
+    bot = ptbot.Bot(FIRST_SECRET)
     main()
 
 
